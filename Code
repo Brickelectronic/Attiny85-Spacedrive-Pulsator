@@ -1,0 +1,49 @@
+#define F_CPU 8000000UL  // Internal Clock Frequency
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+// Setup of the outputs
+#define LED1 PB0	 // LED 1 on output PB0 (Pin 5)
+#define LED2 PB1	 // LED 2 on output PB1 (Pin 6)
+
+// control variables
+int pin1=0, pin2=1, i=0, j=0, invert=0, min=50, max=256, speed=10;
+
+void setup()
+{
+   pinMode(pin1, OUTPUT);
+   pinMode(pin2, OUTPUT);
+
+   // Init outputs
+   analogWrite(pin1, min);
+   analogWrite(pin2, max);
+
+   // Reverse constant
+   invcnt = max + min
+}
+
+void loop()
+{
+  // Increase intensity of light
+  while(i < max)
+  {
+    analogWrite(pin1, i);
+    i = i + 1;
+    // Reverse Pin2 max = min
+    j = invcnt - i;
+    analogWrite(pin2, j);
+    delay(speed);
+  }
+
+  // Decrese intensity of light
+  while(i > min)
+  {
+    analogWrite(pin1, i);
+    i = i - 1;
+    // Reverse Pin2 min => max
+    j = invcnt - i;
+    analogWrite(pin2, j);
+    delay(speed);
+  }
+}
